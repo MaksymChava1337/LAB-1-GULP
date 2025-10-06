@@ -1,10 +1,10 @@
-
 let gulp = require('gulp');
 let rename = require('gulp-rename');
 let sass = require('gulp-sass')(require('sass'));
 let cleancss = require('gulp-clean-css');
 let uglify = require('gulp-uglify');
-
+let imagemin = require('gulp-imagemin');
+let browsersync = require('browser-sync').create();
 
 
 // тут крч цсс мініфікується + копіюється + добавляю суфікс мін
@@ -31,18 +31,20 @@ function copyJs(done){
     done();
 }
 
+//мініфікація картинок 
+function img(){
+    return gulp.src('app/image/*')
+    .pipe(imagemin())
+    .pipe(gulp.dest('dist/image'))
+}
 
-import gulp from 'gulp';
-import imagemin from 'gulp-imagemin';
 
-export default () => (
-	gulp.src('src/image/*')
-		.pipe(imagemin())
-		.pipe(gulp.dest('dist/image'))
-);
+
 
 
 gulp.task(copyScss);
 gulp.task(copyJs);
+
+gulp.task(img);
 
 
