@@ -16,7 +16,7 @@ function copyScss(done){
     }))
     .on('error', console.error.bind(console))
     .pipe(cleancss())
-    //.pipe(rename({suffix: '.min'}))
+    .pipe(rename({suffix: '.min'}))
     .pipe( gulp.dest('./dist/css') );
 
  done();
@@ -32,10 +32,12 @@ function copyJs(done){
 }
 
 //мініфікація картинок 
-function img(){
+function img(done){
     return gulp.src('app/image/*')
     .pipe(imagemin())
     .pipe(gulp.dest('dist/image'))
+
+    done();
 }
 
 
